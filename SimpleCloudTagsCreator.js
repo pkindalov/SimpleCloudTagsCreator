@@ -7,7 +7,8 @@ class SimpleCloudTagsCreator {
         this.errors = {
             dataArrayErrors: [
                 'Tags must be in array',
-                'Every tag must be in Object. The key is the name of the '
+                'Every tag must be in Object. The key is the name of the ',
+                'Must have at least one tag in your data array'
             ],
             fontSizeErrors: [
                 'Wrong type of font size. Expect to pass a number ',
@@ -22,14 +23,18 @@ class SimpleCloudTagsCreator {
     }
 
     setDataArray(data) {
-        if (!data instanceof Array) {
+        if (!(data instanceof Array)) {
             throw Error(this.errors.dataArrayErrors[0]);
         }
 
         for (let info of data) {
-            if (!info instanceof Object) {
+            if (!(info instanceof Object)) {
                 throw Error(this.errors.dataArrayErrors[1]);
             }
+        }
+
+        if (data.length < 1) {
+            throw Error(this.errors.dataArrayErrors[2]);
         }
 
         this.dataArr = data;
@@ -37,7 +42,9 @@ class SimpleCloudTagsCreator {
     }
 
     setMinimumFontSize(minFontSize) {
-        if (!minFontSize instanceof Number) {
+
+        if (typeof minFontSize != 'number') {
+            console.log('here');
             throw Error(this.errors.fontSizeErrors[0]);
         }
 
@@ -50,7 +57,7 @@ class SimpleCloudTagsCreator {
 
 
     setMaximumFontSize(maxFontSize) {
-        if (!maxFontSize instanceof Number) {
+        if (typeof maxFontSize != 'number') {
             throw Error(this.errors.fontSizeErrors[0]);
         }
 
