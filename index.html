@@ -28,16 +28,15 @@
             'C#': getRndNum(100)
         }];
 
-        let simpleCloudTagsCreator = new SimpleCloudTagsCreator(allTagsArr, 12, 50);
+        let simpleCloudTagsCreator = new SimpleCloudTagsCreator(allTagsArr, 12, 50, 'container');
+        let tags = simpleCloudTagsCreator.genTagsCloud();
+        let container = document.getElementById('container');
 
-        console.log(simpleCloudTagsCreator);
-        // let tagsArr = genTagsCloud(allTagsArr, 12, 36);
-        // let container = document.getElementById('container');
-
-        // // console.log(tagsArr);
-        // for (let tag of tagsArr) {
-        //     container.append(tag);
-        // }
+        for (let tag of tags) {
+            container.append(tag);
+        }
+        // console.log(simpleCloudTagsCreator.genTagsCloud());
+        // console.log(simpleCloudTagsCreator);
     </script>
 </body>
 

@@ -69,6 +69,43 @@ class SimpleCloudTagsCreator {
     }
 
 
+    genTagsCloud() {
+        let minCount = Math.min(...Object.values(this.dataArr[0]));
+        let maxCount = Math.max(...Object.values(this.dataArr[0]));
+        let spread = maxCount - minCount;
+        let size = 0;
+        let cloudHtml = '';
+        let cloudTags = [];
+        let linkEl;
+        let elStyle = document.createElement('style');
+        let counter = 1;
+        elStyle.type = 'text/css';
+        spread == 0 ? 1 : spread;
+
+        for (let key of Object.keys(this.dataArr[0])) {
+            elStyle = document.createElement('style');
+            size = this.minFontSize + (this.dataArr[0][key] - minCount) * (this.maxFontSize - this.minFontSize) / spread;
+            linkEl = document.createElement('a');
+            linkEl.href = "#";
+            linkEl.textContent = key;
+            elStyle.innerHTML = `#tagStyle${key} { font-size: ${Math.floor(size)}px; padding-left: 5px; padding-right: 5px }`;
+            document.getElementsByTagName('head')[0].appendChild(elStyle);
+            linkEl.setAttribute('id', `tagStyle${key}`);
+
+            if (counter > 3) {
+                let br = document.createElement('br');
+                cloudTags.push(br);
+                counter = 1;
+            }
+            cloudTags.push(linkEl);
+            counter++;
+            //  cloudTags.push(`<a style="font-size: ${Math.floor(size)}px" class="tagCloud" href="#">${key}</a>`);
+        }
+
+        return cloudTags;
+    }
+
+
     getData() {
         return this.dataArr;
     }
