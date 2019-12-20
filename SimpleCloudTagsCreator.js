@@ -1,25 +1,31 @@
 class SimpleCloudTagsCreator {
-    constructor(data, minFontSize, maxFontSize) {
+    constructor(data, minFontSize, maxFontSize, tagsPerRow = 5) {
         this.dataArr = null;
         this.minFontSize = null;
         this.maxFontSize = null;
         this.maxFontSizeTopLimit = 100;
+        this.tagsPerRow = tagsPerRow;
         this.errors = {
             dataArrayErrors: [
                 'Tags must be in array',
                 'Every tag must be in Object. The key is the name of the ',
-                'Must have at least one tag in your data array'
+                'Must have at least one tag in your data array',
             ],
             fontSizeErrors: [
                 'Wrong type of font size. Expect to pass a number ',
                 'Minimum font size number cannot be smaller than 0',
                 'Too big number for maximum font size'
+            ],
+            tagsPerRowErrors: [
+                'Expect number',
+                'Number cannot be less than one'
             ]
         }
 
         this.setDataArray(data);
         this.setMinimumFontSize(minFontSize);
         this.setMaximumFontSize(maxFontSize);
+
     }
 
     setDataArray(data) {
@@ -68,6 +74,19 @@ class SimpleCloudTagsCreator {
         this.maxFontSize = maxFontSize;
     }
 
+    setTagsPerRow(tagsPerRow) {
+        if (typeof tagsPerRow != 'number') {
+            throw Error(this.errors.tagsPerRowErrors[0]);
+        }
+
+        if (tagsPerRow < 1) {
+            throw Error(this.errors.tagsPerRowErrors[1]);
+        }
+
+        this.tagsPerRow = tagsPerRow;
+
+    }
+
 
     genTagsCloud() {
         let minCount = Math.min(...Object.values(this.dataArr[0]));
@@ -92,7 +111,7 @@ class SimpleCloudTagsCreator {
             document.getElementsByTagName('head')[0].appendChild(elStyle);
             linkEl.setAttribute('id', `tagStyle${key}`);
 
-            if (counter > 3) {
+            if (counter > this.tagsPerRow) {
                 let br = document.createElement('br');
                 cloudTags.push(br);
                 counter = 1;
