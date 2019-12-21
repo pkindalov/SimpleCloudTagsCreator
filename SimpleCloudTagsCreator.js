@@ -8,9 +8,9 @@ class SimpleCloudTagsCreator {
         this.defaultTagStyles = {
             'padding-left': '5px',
             'padding-right': '5px',
-            'font-family': 'Arial',
-            'text-decoration': 'none',
-            'background': 'rgba(210, 255, 82, 1)',
+            // 'font-family': 'Arial',
+            // 'text-decoration': 'none',
+            // 'background': 'rgba(210, 255, 82, 1)',
         };
         // this.tagLinks = null;
         this.errors = {

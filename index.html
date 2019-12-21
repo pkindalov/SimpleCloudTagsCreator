@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CloudTag</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <div id="container"></div>
+    <div class="text" id="container"></div>
     <script src="SimpleCloudTagsCreator.js"></script>
     <script>
         function getRndNum(topLimit) {
@@ -35,7 +36,7 @@
         for (let tag of tags) {
             container.append(tag);
         }
-        console.log(simpleCloudTagsCreator.genTagsCloud());
+        // console.log(simpleCloudTagsCreator.genTagsCloud());
         // console.log(simpleCloudTagsCreator);
     </script>
 </body>
