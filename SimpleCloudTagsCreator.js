@@ -5,6 +5,14 @@ class SimpleCloudTagsCreator {
         this.maxFontSize = null;
         this.maxFontSizeTopLimit = 100;
         this.tagsPerRow = tagsPerRow;
+        this.defaultTagStyles = {
+            'padding-left': '5px',
+            'padding-right': '5px',
+            'font-family': 'Arial',
+            'text-decoration': 'none',
+            'background': 'rgba(210, 255, 82, 1)',
+        };
+        // this.tagLinks = null;
         this.errors = {
             dataArrayErrors: [
                 'Tags must be in array',
@@ -25,7 +33,7 @@ class SimpleCloudTagsCreator {
         this.setDataArray(data);
         this.setMinimumFontSize(minFontSize);
         this.setMaximumFontSize(maxFontSize);
-
+        // this.setTagStyles(styles);
     }
 
     setDataArray(data) {
@@ -87,6 +95,34 @@ class SimpleCloudTagsCreator {
 
     }
 
+    // setTagStyles(styles) {
+    //     // console.log(styles);
+    //     const DEFAULT_TAG_STYLES = {
+    //         'padding-left': '5px',
+    //         'padding-right': '5px',
+    //         'font-family': 'Arial',
+    //         'text-decoration': 'none'
+    //     };
+
+    //     if (!styles || styles == null) {
+    //         this.tagStyles = DEFAULT_TAG_STYLES;
+    //         return;
+    //     }
+
+    //     if (!(styles instanceof Object)) {
+    //         this.tagStyles = DEFAULT_TAG_STYLES;
+    //         return;
+    //     }
+
+    //     if (styles && Object.keys(styles).length < 1) {
+    //         this.tagStyles = DEFAULT_TAG_STYLES;
+    //         return;
+    //     }
+
+    //     this.tagStyles = styles;
+
+    // }
+
 
     genTagsCloud() {
         let minCount = Math.min(...Object.values(this.dataArr[0]));
@@ -98,6 +134,7 @@ class SimpleCloudTagsCreator {
         let linkEl;
         let elStyle = document.createElement('style');
         let counter = 1;
+        let index = 0;
         elStyle.type = 'text/css';
         spread == 0 ? 1 : spread;
 
@@ -107,9 +144,27 @@ class SimpleCloudTagsCreator {
             linkEl = document.createElement('a');
             linkEl.href = "#";
             linkEl.textContent = key;
-            elStyle.innerHTML = `#tagStyle${key} { font-size: ${Math.floor(size)}px; padding-left: 5px; padding-right: 5px }`;
+            //adding css styles which are set in this.tagStyles;
+            elStyle.innerHTML = `#tagStyle${index}`;
+            // elStyle.innerHTML += ' {';
+            // elStyle.innerHTML += `font-size: ${Math.floor(size)}px`;
+            // for (let cssRule of Object.keys(this.tagStyles)) {
+
+            //     elStyle.innerHTML += `${cssRule}: ${this.tagStyles[cssRule]}; `;
+            // };
+            // elStyle.innerHTML += '};'
+
+            //checks for user defined styles in given array. If there are no such provided then use the default one 
+            if (Object.keys(this.dataArr[0][key]).keys > 0) {
+                //apply user defined styles here
+            } else {
+                //apply default css rules
+                elStyle.innerHTML += this.applyDefaultStyles(size);
+            }
+
+            // elStyle.innerHTML = `#tagStyle${key} { font-size: ${Math.floor(size)}px; padding-left: 5px; padding-right: 5px }`;
             document.getElementsByTagName('head')[0].appendChild(elStyle);
-            linkEl.setAttribute('id', `tagStyle${key}`);
+            linkEl.setAttribute('id', `tagStyle${index}`);
 
             if (counter > this.tagsPerRow) {
                 let br = document.createElement('br');
@@ -118,10 +173,24 @@ class SimpleCloudTagsCreator {
             }
             cloudTags.push(linkEl);
             counter++;
+            index++;
             //  cloudTags.push(`<a style="font-size: ${Math.floor(size)}px" class="tagCloud" href="#">${key}</a>`);
         }
 
         return cloudTags;
+    }
+
+
+    applyDefaultStyles(size) {
+        let style = '{ ';
+        for (let rule of Object.keys(this.defaultTagStyles)) {
+            style += `${rule}: ${this.defaultTagStyles[rule]}; `;
+        }
+        //css property font-size added sepatately because it is generated dynamically
+        style += `font-size: ${Math.floor(size)}px; `;
+        style += '}';
+        // console.log(style);
+        return style;
     }
 
 
