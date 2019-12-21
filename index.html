@@ -18,15 +18,63 @@
         }
 
         let allTagsArr = [{
-            'JavaScript': getRndNum(100),
-            'PHP': getRndNum(100),
-            'Python': getRndNum(100),
-            'CSS': getRndNum(100),
-            'HTML': getRndNum(100),
-            'C': getRndNum(100),
-            'C++': getRndNum(100),
-            'Java': getRndNum(100),
-            'C#': getRndNum(100)
+            'JavaScript': {
+                weight: getRndNum(100),
+                styles: {
+                    'font-weight': 'bold;',
+                    'text-decoration': 'underline;'
+                }
+            },
+            'PHP': {
+                weight: getRndNum(100),
+                styles: {
+
+                }
+            },
+            'Python': {
+                weight: getRndNum(100),
+                styles: {
+                    'text-transform': 'uppercase;',
+                    'font-style': 'italic;'
+                }
+            },
+            'CSS': {
+                weight: getRndNum(100),
+                styles: {
+                    'text-decoration': 'underline;'
+                }
+            },
+            'HTML': {
+                weight: getRndNum(100),
+                styles: {
+                    'font-weight': 'bolder;'
+                }
+            },
+            'C': {
+                weight: getRndNum(100),
+                styles: {
+                    'font-style': 'italic;'
+                }
+            },
+            'C++': {
+                weight: getRndNum(100),
+            },
+            'Java': {
+                weight: getRndNum(100),
+                styles: {
+                    'text-transform': 'uppercase;',
+                    'font-style': 'italic;'
+                }
+            },
+            'C#': {
+                weight: getRndNum(100),
+                styles: {
+                    'text-transform': 'lowercase;',
+                    'text-decoration': 'underline;',
+                    'font-weight': 'bold;'
+                }
+
+            }
         }];
 
         let simpleCloudTagsCreator = new SimpleCloudTagsCreator(allTagsArr, 12, 50, 4);

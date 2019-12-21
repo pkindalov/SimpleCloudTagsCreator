@@ -12,6 +12,7 @@ class SimpleCloudTagsCreator {
             // 'text-decoration': 'none',
             // 'background': 'rgba(210, 255, 82, 1)',
         };
+        this.allTagWeights = [];
         // this.tagLinks = null;
         this.errors = {
             dataArrayErrors: [
@@ -123,10 +124,18 @@ class SimpleCloudTagsCreator {
 
     // }
 
+    extractWeights() {
+        for (let key of Object.keys(this.dataArr[0])) {
+            this.allTagWeights.push(this.dataArr[0][key].weight);
+        }
+    }
+
 
     genTagsCloud() {
-        let minCount = Math.min(...Object.values(this.dataArr[0]));
-        let maxCount = Math.max(...Object.values(this.dataArr[0]));
+        this.extractWeights();
+
+        let minCount = Math.min(...this.allTagWeights);
+        let maxCount = Math.max(...this.allTagWeights);
         let spread = maxCount - minCount;
         let size = 0;
         let cloudHtml = '';
@@ -140,7 +149,7 @@ class SimpleCloudTagsCreator {
 
         for (let key of Object.keys(this.dataArr[0])) {
             elStyle = document.createElement('style');
-            size = this.minFontSize + (this.dataArr[0][key] - minCount) * (this.maxFontSize - this.minFontSize) / spread;
+            size = this.minFontSize + (this.dataArr[0][key].weight - minCount) * (this.maxFontSize - this.minFontSize) / spread;
             linkEl = document.createElement('a');
             linkEl.href = "#";
             linkEl.textContent = key;
@@ -154,13 +163,21 @@ class SimpleCloudTagsCreator {
             // };
             // elStyle.innerHTML += '};'
 
-            //checks for user defined styles in given array. If there are no such provided then use the default one 
-            if (Object.keys(this.dataArr[0][key]).keys > 0) {
+
+
+
+
+
+            //checks for user defined styles in given array. If there are no such provided then use the default one
+            if (this.dataArr[0][key].styles && Object.keys(this.dataArr[0][key].styles).length > 0) {
                 //apply user defined styles here
+                elStyle.innerHTML += this.applyUserStyles(size, key);
             } else {
                 //apply default css rules
                 elStyle.innerHTML += this.applyDefaultStyles(size);
             }
+
+
 
             // elStyle.innerHTML = `#tagStyle${key} { font-size: ${Math.floor(size)}px; padding-left: 5px; padding-right: 5px }`;
             document.getElementsByTagName('head')[0].appendChild(elStyle);
@@ -191,6 +208,28 @@ class SimpleCloudTagsCreator {
         style += '}';
         // console.log(style);
         return style;
+    }
+
+
+    applyUserStyles(size, key) {
+        //will ignore user font-size. Use min and max number from the weights to set the font-size
+        let style = '{ ';
+
+        for (let rule of Object.keys(this.dataArr[0][key].styles)) {
+            if (rule.toLocaleLowerCase == 'font-size') {
+                continue;
+            }
+            // console.log(this.dataArr[0][key]['styles'][rule]);
+            style += `${rule}: ${this.dataArr[0][key]['styles'][rule]} `;
+        }
+
+        style += `font-size: ${Math.floor(size)}px; `;
+        style += `padding-left: 5px; `;
+        style += `padding-right: 5px; `;
+        style += '}';
+
+        return style;
+
     }
 
 
