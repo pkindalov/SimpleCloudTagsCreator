@@ -107,16 +107,16 @@ class SimpleCloudTagsCreator {
         let allKeys = Object.keys(this.dataArr[0]);
         let rndIndex;
         let key = '';
-        let keyIndePos = -1;
+        let keyIndexPos = -1;
         let resultArr = [];
 
         while (allKeys.length > 0) {
             rndIndex = Math.floor(Math.random() * allKeys.length);
             key = allKeys[rndIndex];
             newObj[key] = this.dataArr[0][key];
-            keyIndePos = allKeys.indexOf(key);
-            if (keyIndePos != -1) {
-                allKeys.splice(keyIndePos, 1);
+            keyIndexPos = allKeys.indexOf(key);
+            if (keyIndexPos != -1) {
+                allKeys.splice(keyIndexPos, 1);
             }
 
         }
