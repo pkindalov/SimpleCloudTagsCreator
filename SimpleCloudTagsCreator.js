@@ -1,10 +1,11 @@
 class SimpleCloudTagsCreator {
-    constructor(data, minFontSize, maxFontSize, tagsPerRow = 5) {
+    constructor(data, minFontSize, maxFontSize, tagsPerRow = 5, className, shuffle) {
         this.dataArr = null;
         this.minFontSize = null;
         this.maxFontSize = null;
         this.maxFontSizeTopLimit = 100;
         this.tagsPerRow = tagsPerRow;
+        this.className = className ? className : 'tag'
         this.defaultTagStyles = {
             'padding-left': '5px',
             'padding-right': '5px',
@@ -34,6 +35,11 @@ class SimpleCloudTagsCreator {
         this.setDataArray(data);
         this.setMinimumFontSize(minFontSize);
         this.setMaximumFontSize(maxFontSize);
+
+        if (shuffle) {
+            this.shuffleData();
+        }
+
         // this.setTagStyles(styles);
     }
 
@@ -96,6 +102,33 @@ class SimpleCloudTagsCreator {
 
     }
 
+    shuffleData() {
+        let newObj = {};
+        let allKeys = Object.keys(this.dataArr[0]);
+        let rndIndex;
+        let key = '';
+        let keyIndePos = -1;
+        let resultArr = [];
+
+        while (allKeys.length > 0) {
+            rndIndex = Math.floor(Math.random() * allKeys.length);
+            key = allKeys[rndIndex];
+            newObj[key] = this.dataArr[0][key];
+            keyIndePos = allKeys.indexOf(key);
+            if (keyIndePos != -1) {
+                allKeys.splice(keyIndePos, 1);
+            }
+
+        }
+        resultArr.push(newObj);
+
+        this.dataArr = resultArr;
+    }
+
+    // for (let i = 0; i < allKeys.length; i++) {
+    //     console.log(key);
+    // }
+
     // setTagStyles(styles) {
     //     // console.log(styles);
     //     const DEFAULT_TAG_STYLES = {
@@ -151,8 +184,9 @@ class SimpleCloudTagsCreator {
             elStyle = document.createElement('style');
             size = this.minFontSize + (this.dataArr[0][key].weight - minCount) * (this.maxFontSize - this.minFontSize) / spread;
             linkEl = document.createElement('a');
-            linkEl.href = "#";
+            linkEl.href = this.dataArr[0][key]['url'] ? this.dataArr[0][key]['url'] : "#";
             linkEl.textContent = key;
+            linkEl.setAttribute('class', this.className);
             //adding css styles which are set in this.tagStyles;
             elStyle.innerHTML = `#tagStyle${index}`;
             // elStyle.innerHTML += ' {';
