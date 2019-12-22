@@ -91,11 +91,11 @@
         }];
 ```
 
-<p>
-	From the example above you can see that <strong>this is an array with an object inside it.</strong> Every single tag is a property of this main object. The first key of the main object is the name of the tag - Javascript, Php, C#, Java etc... This first key has it own config object whith contain the following settings.
+ From the example above you can see that this is **an array with an object inside it.** Every single tag is a property of this main object. The first key of the main object is the name of the tag - Javascript, Php, C#, Java etc... This first key has it own **config** object whith contain the following settings.
     
--     <strong>weight</strong> - it is a <strong>number</strong>. Use it to define a font-size of the tag. In the example above I use a function <strong>getRndNum</strong> to generate a random numbers. It is not important for the class. You can manually add weights to every tag.
--     <strong>styles</strong> - it contains an <strong>object</strong> with user defined(yours) <strong>css</strong> rules. The keys are the css property names and the values of the properties. If there are <strong>no styles provided</strong> then will use the defaults one.
--     <strong>url</strong> - set the href attribute to every tag. If such is no provided then will be used <strong>`#`</strong>
-</p>
+- **weight** - it is a **number**. Use it to define a font-size of the tag. In the example above I use a function **getRndNum** to generate a random numbers. It is not important for the class. You can manually add weights to every tag.
+
+- **styles** - it contains an **object** with user defined(yours) **css** rules. The keys are the css property names and the values of the properties. If there are **no styles provided** then will use the defaults one.
+
+- **url** - set the href attribute to every tag. If such is no provided then will be used **`#`**
 
