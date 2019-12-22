@@ -136,3 +136,4 @@ let tags = simpleCloudTagsCreator.genTagsCloud(); //we get array with objects wh
 
 (11)[a#tagStyle0.mySpecifiedTagClass, a#tagStyle1.mySpecifiedTagClass, a#tagStyle2.mySpecifiedTagClass, a#tagStyle3.mySpecifiedTagClass, br, a#tagStyle4.mySpecifiedTagClass, a#tagStyle5.mySpecifiedTagClass, a#tagStyle6.mySpecifiedTagClass, a#tagStyle7.mySpecifiedTagClass, br, a#tagStyle8.mySpecifiedTagClass]
 
+<img src="returnedTagsArray.JPG" alt="returned array with tag objects" />>
