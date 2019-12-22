@@ -99,3 +99,29 @@
 
 - **url** - set the href attribute to every tag. If such is no provided then will be used **`#`**
 
+3.Next step it to make instance of the class and to pass needed data
+
+The constructor of the class expects the following data:
+- **data** - this is an array with **only one element** which is **object**. Inside it there must be  the **name of the tag** for the **property** and **another object with settings** for the **current tag** for value.
+
+- **minFontSize** - expected to be **number**. Used to define the minimum font-size.
+
+- **maxFontSize** - Similar to the previous one. Again, it must be a **number**. Define the maximum font-size.
+
+- **tagsPerRow** - define how much tags to be put on the line. Expected to be **number**. If there is no such provided will be used the **default number 5**.
+
+- **className** - name of the class which will be put in tag. Expected to be **string**. If such is no provided then it will be used a default one.
+
+- **shuffle** - this will change the order ot the tags. Expected to be **boolean** value. If there is no such provided, then will be **turned off on default**.
+
+You can see from the following all data which can be passed when you create new instance of the class.
+```javascript
+class SimpleCloudTagsCreator {
+    constructor(data, minFontSize, maxFontSize, tagsPerRow = 5, className, shuffle) {
+```
+The next you see example making a new instance of the class, passing all needed data to the constructor.
+
+```javascript
+     let simpleCloudTagsCreator = new SimpleCloudTagsCreator(allTagsArr, 12, 50, 4, 'mySpecifiedTagClass', true);
+```
+
