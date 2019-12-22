@@ -4,7 +4,7 @@
 
 # How to use?
    1.  Firstly, you must include js file at the end of the body tag.
-     `<body>`
-         ...
-        `<script src="SimpleCloudTagsCreator.js"></script>`
-    `</body>`
+     `<body>` <br />
+         ... <br />
+        `<script src="SimpleCloudTagsCreator.js"></script>` <br />
+    `</body>` <br />
