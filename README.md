@@ -5,12 +5,13 @@
 # How to use?
 <ol>
     <li>
-        Firstly, you must include js file in the end of the body tag.
-        <code>
-            <body>
-                ...
-                <script src="SimpleCloudTagsCreator.js"></script>
-            </body>
-        </code>
+        Firstly, you must include js file at the end of the body tag.
+            ```javascript
+                <body>
+                    ...
+                    <script src="SimpleCloudTagsCreator.js"></script>
+                </body>
+            ```    
+           
     </li>
 </ol>
