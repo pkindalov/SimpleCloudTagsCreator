@@ -1,10 +1,12 @@
 # SimpleCloudTagsCreator
-<p>Simple class for creating fast a cloud of tags</p>
+Simple class for creating fast a cloud of tags.
+
+<img src="example1.JPG" alt="" />
 
 
 # How to use?
 
-1.Firstly, you must include js file at the end of the body tag.<br />
+#### 1.Firstly, you must include js file at the end of the body tag.
 
 ```javascript
 <body>
@@ -15,7 +17,7 @@
 
 
 
-2.You must prepare needed data.
+#### 2.You must prepare needed data.
 ```javascript
 
 	function getRndNum(topLimit) {
@@ -99,7 +101,7 @@
 
 - **url** - set the href attribute to every tag. If such is no provided then will be used **`#`**
 
-3.Next step it to make instance of the class and to pass needed data
+#### 3.Next step it to make instance of the class and to pass needed data
 
 The constructor of the class expects the following data:
 - **data** - this is an array with **only one element** which is **object**. Inside it there must be  the **name of the tag** for the **property** and **another object with settings** for the **current tag** for value.
@@ -124,4 +126,13 @@ The next you see example making a new instance of the class, passing all needed 
 ```javascript
      let simpleCloudTagsCreator = new SimpleCloudTagsCreator(allTagsArr, 12, 50, 4, 'mySpecifiedTagClass', true);
 ```
+
+#### 4.Get the generated tags
+Now, when we made successfully new instance of the class, now we can get generated tags with the method of the class **genTagsCloud()**. It returns an array with generated links whch are **objects**
+
+```javascript
+let tags = simpleCloudTagsCreator.genTagsCloud(); //we get array with objects which are the tags.
+```
+
+(11)[a#tagStyle0.mySpecifiedTagClass, a#tagStyle1.mySpecifiedTagClass, a#tagStyle2.mySpecifiedTagClass, a#tagStyle3.mySpecifiedTagClass, br, a#tagStyle4.mySpecifiedTagClass, a#tagStyle5.mySpecifiedTagClass, a#tagStyle6.mySpecifiedTagClass, a#tagStyle7.mySpecifiedTagClass, br, a#tagStyle8.mySpecifiedTagClass]
 
