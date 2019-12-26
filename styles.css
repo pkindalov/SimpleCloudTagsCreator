@@ -24,3 +24,7 @@
        /* font-size: 20vw; */
        font-family: "Poppins", sans-serif;
    }
+
+   a{
+       text-decoration: none;
+   }
